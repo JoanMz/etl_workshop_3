@@ -50,18 +50,39 @@ Follow these steps to set up the project:
      pip install -r requirements.txt
      ```
 
-5. **Create Password Files and Virtual Environment**:
+4. **Create Password Files and Virtual Environment**:
    - Create the necessary password files (`./.env`, `./DB_connection/docker-secrets`)
-  
-     
-3. **Download Docker Image for the Database**:
-   - Into DB_connection directory run the PostgreSQL compose  with the image and configurations: 
      ```bash
-     #At /DB_connection
+     echo  'DB_1 = workshop_03 \n DB_PORT = 54321 \n DB_PASSWORD = **** \n DB_HOST = localhost \n DB_USER = postgres' >> ./.env
+     ```
+     ```bash
+     echo  'POSTGRES_PASSWORD=****' >> ./DB_connection/docker-secrets
+     ```
+     
+5. **Download Docker Image for the Database**:
+   - Into DB_connection directory run the PostgreSQL compose  with the image and configurations: 
+     `\DB_connection`
+     ```bash
      sudo docker compose up
      ```
   - Into Kafka directory run the docker-compose.yml file with the kafka environment
-    ```bash
-    #At /Kafka
+    `/kafka`
+     ```bash
     sudo docker compose up
     ```
+     
+6. **Run the notebooks**
+   1. `EDA.ipynb`
+   2. `Model.ipynb`
+
+
+7. **Run the kafka**
+   - on the one console
+     ```bash
+     python3 ./Kafka/kafka_consumer.py
+     ```
+   - on the second console
+     ```bash
+     python3 ./kafka/kafka_producer.py
+     ```
+     
