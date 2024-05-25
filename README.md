@@ -33,7 +33,7 @@ Follow these steps to set up the project:
 
 
 2. **Install Required Programs**:
-   - Install Python 3
+   - Install Python 3 `sudo apt install python3`
    - Install Docker: [Docker Engine Installation Guide](https://docs.docker.com/engine/install/ubuntu/)
 
 3. **Create virtualenv**:
