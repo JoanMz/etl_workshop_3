@@ -1,14 +1,44 @@
 services:
 
-        postgresdb:
+        postgresdb_w3:
+                container_name: postgresdb_w3
                 image: postgres:16.2-alpine3.19
                 volumes:
                         - postgres-db-volume-kafka:/var/lib/postgresql/data
                 env_file:
                         - ./docker-secrets
-
-
                 ports:
                         - 54321:5432
+                networks:
+                        - kafka_w3
+                environment:
+                        - POSTGRES_INITDB_ARGS=--encoding=UTF8
+                        - POSTGRES_DB=workshop_03
+                
+
+
+        pgadmin_w3:
+                container_name: pgadmin_w3
+                image: dpage/pgadmin4:latest
+                volumes:
+                        - pgadmin-w3:/var/lib/pgadmin
+                networks:
+                        - kafka_w3
+                env_file:
+                        - ./docker-secrets-pgadmin
+                ports:
+                        - 6080:80
+                links:
+                        - postgresdb_w3
+
+
+
 volumes:
         postgres-db-volume-kafka:
+        pgadmin-w3:
+
+
+networks:
+        kafka_w3:
+                driver: bridge
+
